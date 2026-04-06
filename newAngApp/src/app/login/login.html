@@ -1,0 +1,26 @@
+<div class="container-fluid h-100" style="padding-top: 20px">
+    <div class="row h-100">
+      <!-- Left side with image -->
+      <div class="col-md-8 left-side d-none d-md-block"></div>
+
+      <!-- Right side with login form -->
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <div class="card shadow p-4 login-card">
+          <h4 class="text-center mb-4">Login to continue</h4>
+         <form method="post">
+            <div class="mb-3">
+              <label for="email" class="form-label">User Name</label>
+              <input type="email" [(ngModel)]="username" name="username" class="form-control" id="email" placeholder="Mobile number / Email Id">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100" (click)="onSubmit()">LOGIN</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>

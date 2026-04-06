@@ -1,0 +1,23 @@
+ body {
+      height: 100vh;
+      margin: 0;
+      
+    }
+    .left-side {
+      background: url('../../assets/hms.png') no-repeat center center;
+      background-size: cover;
+    }
+    .login-card {
+      max-width: 400px;
+      margin: auto;
+      
+    }
+    .social-icons a {
+      font-size: 1.5rem;
+      margin: 0 10px;
+      color: #495057;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      color: #0d6efd;
+    }
