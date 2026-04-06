@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "30K4RfsKZwQ=",
+  "dgSpecHash": "Gn2pwKPN+Kc=",
   "success": true,
-  "projectFilePath": "C:\\HospitalMgmt\\HMS\\healthWebAPi\\healthWebAPi.csproj",
+  "projectFilePath": "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\10854188\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\10854188\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.5\\microsoft.aspnetcore.authentication.jwtbearer.10.0.5.nupkg.sha512",

@@ -3295,11 +3295,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\HospitalMgmt\\HMS\\healthWebAPi\\healthWebAPi.csproj",
+      "projectUniqueName": "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj",
       "projectName": "healthWebAPi",
-      "projectPath": "C:\\HospitalMgmt\\HMS\\healthWebAPi\\healthWebAPi.csproj",
+      "projectPath": "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj",
       "packagesPath": "C:\\Users\\10854188\\.nuget\\packages\\",
-      "outputPath": "C:\\HospitalMgmt\\HMS\\healthWebAPi\\obj\\",
+      "outputPath": "C:\\HMS\\healthWebAPi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\10854188\\AppData\\Roaming\\NuGet\\NuGet.Config"
