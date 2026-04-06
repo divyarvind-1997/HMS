@@ -1,0 +1,41 @@
+CREATE TABLE Patients (
+    Id INT PRIMARY KEY,
+    MRN VARCHAR(20) NOT NULL UNIQUE,
+    PatientName VARCHAR(100) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Gender VARCHAR(10) NOT NULL,
+    MobileNumber VARCHAR(15) NOT NULL,
+    Email VARCHAR(100),
+    City VARCHAR(50),
+    IsDeleted BIT DEFAULT 0,
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+-----------------------------------------------
+INSERT INTO Patients
+(
+    Id,
+    MRN,
+    PatientName,
+    DateOfBirth,
+    Gender,
+    MobileNumber,
+    Email,
+    City,
+    IsDeleted,
+    CreatedDate
+)
+VALUES
+(
+    1,
+    'MRN-002',
+    'tej123wwwwww',
+    '1992-08-15',
+    'Female',
+    '9876543211',
+    'jane@test.com',
+    'Mumbai',
+    0,
+    '2026-04-02 09:28:00'
+);
+---------------------------------------------------
