@@ -1,0 +1,186 @@
+<div class="container">
+  <div class="header">
+    <h1>Appointment Management</h1>
+    <button class="btn btn-primary" (click)="showAddForm()">Schedule New Appointment</button>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section" *ngIf="!showForm">
+    <div class="filter-box">
+      <div class="filter-group">
+        <label for="doctorFilter">Doctor ID:</label>
+        <input 
+          type="number" 
+          id="doctorFilter"
+          [(ngModel)]="filterDoctorId" 
+          placeholder="Filter by Doctor ID" 
+          class="filter-input">
+      </div>
+      
+      <div class="filter-group">
+        <label for="dateFilter">Date:</label>
+        <input 
+          type="date" 
+          id="dateFilter"
+          [(ngModel)]="filterDate" 
+          class="filter-input">
+      </div>
+      
+      <div class="filter-actions">
+        <button class="btn btn-secondary" (click)="applyFilters()">Apply Filters</button>
+        <button class="btn btn-outline-secondary" (click)="clearFilters()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appointment Form -->
+  <div class="form-section" *ngIf="showForm">
+    <div class="form-header">
+      <h2>{{ isEditing ? 'Edit Appointment' : 'Schedule New Appointment' }}</h2>
+      <button class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+    </div>
+    
+    <form [formGroup]="appointmentForm" (ngSubmit)="saveAppointment()" class="appointment-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="patientId">Patient*</label>
+          <select id="patientId" formControlName="PatientId" class="form-control">
+            <option value="">Select Patient</option>
+            <option *ngFor="let patient of patients" [value]="patient.patientId">
+              {{ patient.fullName }} ({{ patient.mrn }})
+            </option>
+          </select>
+          <div class="error" *ngIf="appointmentForm.get('PatientId')?.invalid && appointmentForm.get('PatientId')?.touched">
+            Patient is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="doctorId">Doctor ID*</label>
+          <input type="number" id="doctorId" formControlName="DoctorId" class="form-control" placeholder="Enter Doctor ID">
+          <div class="error" *ngIf="appointmentForm.get('DoctorId')?.invalid && appointmentForm.get('DoctorId')?.touched">
+            Doctor ID is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startDateTime">Start Date & Time*</label>
+          <input 
+            type="datetime-local" 
+            id="startDateTime" 
+            formControlName="StartDateTime" 
+            class="form-control"
+            (change)="onStartTimeChange()">
+          <div class="error" *ngIf="appointmentForm.get('StartDateTime')?.invalid && appointmentForm.get('StartDateTime')?.touched">
+            Start Date & Time is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="endDateTime">End Date & Time*</label>
+          <input type="datetime-local" id="endDateTime" formControlName="EndDateTime" class="form-control">
+          <div class="error" *ngIf="appointmentForm.get('EndDateTime')?.invalid && appointmentForm.get('EndDateTime')?.touched">
+            End Date & Time is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="status">Status*</label>
+          <select id="status" formControlName="Status" class="form-control">
+            <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+          </select>
+          <div class="error" *ngIf="appointmentForm.get('Status')?.invalid && appointmentForm.get('Status')?.touched">
+            Status is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="reason">Reason</label>
+          <input type="text" id="reason" formControlName="Reason" class="form-control" placeholder="Appointment reason">
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="notes">Notes</label>
+        <textarea id="notes" formControlName="Notes" class="form-control" rows="3" placeholder="Additional notes"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="appointmentForm.invalid">
+          {{ isEditing ? 'Update Appointment' : 'Schedule Appointment' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Appointments List -->
+  <div class="appointments-list" *ngIf="!showForm">
+    <div class="loading" *ngIf="loading">Loading appointments...</div>
+    
+    <div class="appointments-table" *ngIf="!loading">
+      <div class="table-header">
+        <h2>Appointments ({{ filteredAppointments.length }})</h2>
+      </div>
+      
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Doctor ID</th>
+              <th>Date & Time</th>
+              <th>Duration</th>
+              <th>Status</th>
+              <th>Reason</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appointment of filteredAppointments" [class]="'status-' + appointment.Status.toLowerCase().replace(' ', '-')">
+              <td>
+                <div class="patient-info">
+                  <strong>{{ appointment.PatientName }}</strong>
+                </div>
+              </td>
+              <td>{{ appointment.DoctorId }}</td>
+              <td>
+                <div class="datetime-info">
+                  <div class="date">{{ appointment.StartDateTime | date:'mediumDate' }}</div>
+                  <div class="time">{{ appointment.StartDateTime | date:'shortTime' }} - {{ appointment.EndDateTime | date:'shortTime' }}</div>
+                </div>
+              </td>
+              <td>{{ calculateDuration(appointment.StartDateTime, appointment.EndDateTime) }} min</td>
+              <td>
+                <select 
+                  class="status-select" 
+                  [value]="appointment.Status" 
+                  (change)="updateStatus(appointment, $any($event.target).value)"
+                  [class]="'status-' + appointment.Status.toLowerCase().replace(' ', '-')">
+                  <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                </select>
+              </td>
+              <td>{{ appointment.Reason || '-' }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline-primary" (click)="editAppointment(appointment)">Edit</button>
+                  <button class="btn btn-sm btn-outline-warning" 
+                          *ngIf="appointment.Status !== 'Cancelled'"
+                          (click)="cancelAppointment(appointment)">Cancel</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="no-data" *ngIf="filteredAppointments.length === 0 && !loading">
+          <p>No appointments found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
