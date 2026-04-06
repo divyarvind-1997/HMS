@@ -1,0 +1,147 @@
+
+<div class="book-container">
+
+<mat-card class="appointment-card">
+
+  <!-- Header -->
+  <mat-card-header>
+    <mat-card-title>Book Appointment</mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Patient Details
+    <h3 class="section-title">Patient Details</h3>
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Patient Name</mat-label>
+        <input matInput formControlName="patientName" />
+        <mat-error *ngIf="f['patientName'].errors?.['required']">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="f['patientName'].errors?.['minlength']">
+          Min 2 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile</mat-label>
+        <input matInput type="tel" formControlName="mobile" />
+        <mat-error *ngIf="f['mobile'].errors?.['required']">
+          Mobile is required
+        </mat-error>
+        <mat-error *ngIf="f['mobile'].errors?.['pattern']">
+          Enter valid 10‑digit mobile
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="f['email'].errors?.['email']">
+          Invalid email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="F">Female</mat-option>
+          <mat-option value="M">Male</mat-option>
+          <mat-option value="O">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" formControlName="dob" />
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+
+    </div> -->
+
+    <!-- Appointment Details -->
+    <h3 class="section-title">Enter Appointment Details</h3>
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Specialization</mat-label>
+        <mat-select formControlName="specialization">
+          <mat-option *ngFor="let s of specializations" [value]="s">
+            {{ s }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f['specialization'].invalid">
+          Required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Doctor</mat-label>
+        <mat-select formControlName="doctorId">
+          <mat-option *ngFor="let d of filteredDoctors" [value]="d.id">
+            {{ d.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f['doctorId'].invalid">
+          Required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Appointment Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="apptPicker"
+          formControlName="appointmentDate"
+          [min]="minDateStr" />
+        <mat-datepicker-toggle matSuffix [for]="apptPicker"></mat-datepicker-toggle>
+        <mat-datepicker #apptPicker></mat-datepicker>
+        <mat-error *ngIf="form.errors?.['dateInPast']">
+          Date cannot be in past
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Time Slot</mat-label>
+        <mat-select formControlName="slot" [disabled]="availableSlots.length === 0">
+          <mat-option *ngFor="let s of availableSlots" [value]="s">
+            {{ s }}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="availableSlots.length === 0">
+          Select doctor & date to load slots
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Reason for Visit</mat-label>
+        <textarea matInput rows="3" formControlName="reason"></textarea>
+        <mat-error *ngIf="f['reason'].invalid">
+          Reason is required (min 5 chars)
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button mat-stroked-button type="button" (click)="onClickBack()">
+        Back
+      </button>
+
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="form.invalid">
+        Book Appointment
+      </button>
+    </div>
+
+  </form>
+</mat-card>
+</div>

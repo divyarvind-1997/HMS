@@ -1,0 +1,85 @@
+<div class="appointments-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h2>Appointments</h2>
+
+    <button mat-raised-button color="primary" routerLink="/appointments/book">
+      <mat-icon>add</mat-icon>
+      Book Appointment
+    </button>
+  </div>
+
+  <!-- Card -->
+  <mat-card>
+    <table *ngIf="!loading" mat-table [dataSource]="appointments" class="mat-elevation-z2">
+
+      <!-- Patient -->
+      <ng-container matColumnDef="patient">
+        <th mat-header-cell *matHeaderCellDef> Patient </th>
+        <td mat-cell *matCellDef="let a"> {{ a.patientName }} </td>
+      </ng-container>
+
+      <!-- Date -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date & Time </th>
+        <td mat-cell *matCellDef="let a">
+          {{ a.appointmentDate | date:'dd MMM yyyy, hh:mm a' }}
+        </td>
+      </ng-container>
+
+      <!-- slot -->
+      <ng-container matColumnDef="slot">
+        <th mat-header-cell *matHeaderCellDef> Slot </th>
+        <td mat-cell *matCellDef="let a">
+          {{ a.slot }}
+        </td>
+      </ng-container>
+
+      <!-- Status -->
+      
+<ng-container matColumnDef="status">
+  <th mat-header-cell *matHeaderCellDef>Status</th>
+  <td mat-cell *matCellDef="let a">
+    <mat-chip
+      [ngClass]="a.status.toLowerCase()"
+      selected>
+      {{ a.status }}
+    </mat-chip>
+  </td>
+</ng-container>
+
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let a">
+
+         <button mat-icon-button color="primary" matTooltip="Reschedule appointment"
+                  [disabled]="a.status === 'CANCELLED'"
+                  (click)="openReschedule(a)">
+            <mat-icon>event</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" matTooltip="Cancel appointment"
+                  [disabled]="a.status === 'CANCELLED'"
+                  (click)="openCancel(a)">
+            <mat-icon>close</mat-icon>
+          </button> 
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+<tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      No records found
+    </td>
+  </tr>
+
+    </table>
+  </mat-card>
+
+</div>
