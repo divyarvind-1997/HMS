@@ -1,26 +1,60 @@
-<div class="container-fluid h-100" style="padding-top: 20px">
-    <div class="row h-100">
-      <!-- Left side with image -->
-      <div class="col-md-8 left-side d-none d-md-block"></div>
+<body>
 
-      <!-- Right side with login form -->
-      <div class="col-md-4 d-flex align-items-center justify-content-center">
-        <div class="card shadow p-4 login-card">
-          <h4 class="text-center mb-4">Login to continue</h4>
-         <form method="post">
+  <div class="container-fluid vh-100">
+    <div class="row h-100">
+      <!-- Left Illustration -->
+      <div class="col-md-6 illustration">
+        <!-- Replace with your own healthcare illustration -->
+        <img src="../../assets/hms.png" alt="Healthcare">
+      </div>
+
+      <!-- Right Signup Form -->
+      <div class="col-md-6 form-section">
+        <div class="card shadow p-4">
+          <h3 class="text-center mb-4">Login to continue</h3>
+          <!-- <form method="post">
             <div class="mb-3">
               <label for="email" class="form-label">User Name</label>
-              <input type="email" [(ngModel)]="username" name="username" class="form-control" id="email" placeholder="Mobile number / Email Id">
+              <input type="email" [(ngModel)]="username" name="username" class="form-control" id="email"
+                placeholder="Mobile number / Email Id">
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder="Password">
+              <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password"
+                placeholder="Password">
             </div>
             
-            <button type="submit" class="btn btn-primary w-100" (click)="onSubmit()">LOGIN</button>
+              <button type="submit" class="btn btn-primary w-100" (click)="onSubmit()">LOGIN</button>
+              <button type="submit" class="btn btn-primary w-100" routerLink="/signup">Sign Up</button>
+           
+          </form> -->
+          <form>
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">User Name</label>
+              <input type="email" [(ngModel)]="username" name="username" class="form-control" id="email"
+                placeholder="Mobile number / Email Id">
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password"
+                placeholder="Password">
+            </div>
+
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary w-100" (click)="onSubmit()">LOGIN</button>
+              <a class="btn btn-primary" routerLink="/signup">Signup</a>
+            </div>
           </form>
-          
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
+
+</body>

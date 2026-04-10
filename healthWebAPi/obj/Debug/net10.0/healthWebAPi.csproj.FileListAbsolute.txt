@@ -319,3 +319,4 @@ C:\HospitalMgmt\HMS\healthWebAPi\obj\Debug\net10.0\refint\healthWebAPi.dll
 C:\HospitalMgmt\HMS\healthWebAPi\obj\Debug\net10.0\healthWebAPi.pdb
 C:\HospitalMgmt\HMS\healthWebAPi\obj\Debug\net10.0\healthWebAPi.genruntimeconfig.cache
 C:\HospitalMgmt\HMS\healthWebAPi\obj\Debug\net10.0\ref\healthWebAPi.dll
+C:\HMS\healthWebAPi\obj\Debug\net10.0\healthWebAPi.sourcelink.json

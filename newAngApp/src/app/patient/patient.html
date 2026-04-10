@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="header">
+    <h1>Patient Management</h1>
+    <button class="btn btn-primary" (click)="showAddForm()">Add New Patient</button>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section" *ngIf="!showForm">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="searchPatients()" 
+        placeholder="Search patients by name, MRN, or phone..." 
+        class="search-input">
+      <!-- <button class="btn btn-secondary" (click)="loadPatients()">Clear</button> -->
+       <button class="btn btn-secondary" (click)="searchTerm = ''; loadPatients()">Clear</button>
+    </div>
+  </div>
+
+  <!-- Patient Form -->
+  <div class="form-section" *ngIf="showForm">
+    <div class="form-header">
+      <h2>{{ isEditing ? 'Edit Patient' : 'Add New Patient' }}</h2>
+      <button class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+    </div>
+    
+    <form [formGroup]="patientForm" (ngSubmit)="savePatient()" class="patient-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="mrn">MRN*</label>
+          <input type="text" id="mrn" formControlName="mrn" class="form-control" [readonly]="isEditing">
+          <div class="error" *ngIf="patientForm.get('mrn')?.invalid && patientForm.get('mrn')?.touched">
+            MRN is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="fullName">Full Name*</label>
+          <input type="text" id="fullName" formControlName="fullName" class="form-control">
+          <div class="error" *ngIf="patientForm.get('fullName')?.invalid && patientForm.get('fullName')?.touched">
+            Full Name is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dob">Date of Birth*</label>
+          <input type="date" id="dob" formControlName="dob" class="form-control">
+          <div class="error" *ngIf="patientForm.get('dob')?.invalid && patientForm.get('dob')?.touched">
+            Date of Birth is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="gender">Gender*</label>
+          <select id="gender" formControlName="gender" class="form-control">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="error" *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched">
+            Gender is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone*</label>
+          <input type="tel" id="phone" formControlName="phone" class="form-control">
+          <div class="error" *ngIf="patientForm.get('phone')?.invalid && patientForm.get('phone')?.touched">
+            Phone is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="address">Address</label>
+        <textarea id="address" formControlName="address" class="form-control" rows="3"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid">
+          {{ isEditing ? 'Update Patient' : 'Add Patient' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Patients List -->
+  <div class="patients-list" *ngIf="!showForm">
+    <div class="loading" *ngIf="loading">Loading patients...</div>
+    
+    <div class="patients-table" *ngIf="!loading">
+      <div class="table-header">
+        <h2>Patients ({{ filteredPatients.length }})</h2>
+      </div>
+      
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>MRN</th>
+              <th>Full Name</th>
+              <th>DOB</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of filteredPatients" [class.inactive]="patient.isActive === false">
+              <td>{{ patient.mrn }}</td>
+              <td>{{ patient.fullName }}</td>
+              <td>{{ patient.dob | date:'mediumDate' }}</td>
+              <td>{{ patient.gender }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>{{ patient.email || '-' }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline-primary" (click)="editPatient(patient)">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deletePatient(patient)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="no-data" *ngIf="filteredPatients.length === 0 && !loading">
+          <p>No patients found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>

@@ -1,53 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: cadetblue;">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/HMS_logo.png" alt="Logo" width="150" height="100" class="d-inline-block align-text-top">
+     
+    </a>
 
+  
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand border" href="#" >Health Management System</a>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-     @if (authService.isLoggedIn()) {
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Patient</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Doctor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Appointment</a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">Notification</a>
-      </li>
-    </ul>
-     }
-    
-   
-    <div class="collapse navbar-collapse p-4" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        @if (authService.isLoggedIn()) {
-          <span class="text-white bg-dark ">Welcome, {{ authService.getUsername() }}!</span>
-        <li class="nav-item">          
-           <button (click)="logout()" class="btn btn-danger" >Logout</button>
-        </li>
-        }
-        <!-- @else
-        {
+    <!-- Menu items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      @if (authService.isLoggedIn()) {
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-         
-          <a class="btn btn-primary" routerLink="/login">Login</a>
+          <a class="nav-link active" aria-current="page" routerLinkActive="active" routerLink="/home">Home</a>
         </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" routerLinkActive="active" routerLink="/patient" >Patient</a> -->
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/patient']">Patient</a>
+        </li>
+        <!-- <li class="nav-item"> -->
+          <a class="nav-link" routerLinkActive="active" routerLink="/doctor" >Doctor</a> 
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/appointment">Appointment</a>
+        </li> -->
+       
+      </ul>
+      }
+      <!-- Login / Logout buttons -->
+      <div class="d-flex right">
+        @if (authService.isLoggedIn()) {
+           <span class="me-3 fw-bold">Welcome, {{ authService.getUsername() }}!</span>
+        <!-- <span class="text-white bg-dark ">Welcome, {{ authService.getUsername() }}!</span> -->
+        <button class="btn btn-danger" (click)="logout()" type="button">Logout</button>
+        }
+        <!-- @else{
+        <button class="btn btn-outline-primary me-2" type="button">Login</button>
         } -->
 
 
-      </ul>
+      </div>
     </div>
   </div>
 </nav>
 
-  <router-outlet></router-outlet>
+
+<router-outlet></router-outlet>

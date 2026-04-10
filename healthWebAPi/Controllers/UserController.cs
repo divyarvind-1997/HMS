@@ -19,7 +19,7 @@ namespace healthWebApi.Controllers
         private readonly AppDbContext _context;
         private readonly TokenService _tokenService;
 
-        private readonly IConfiguration _config;
+        //private readonly IConfiguration _config;
 
         public UserController(TokenService tokenService, AppDbContext context)
         {
@@ -31,9 +31,8 @@ namespace healthWebApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterUser request)
         {
-
             if (await _context.Users.AnyAsync(x => x.Username == request.Username))
-                return BadRequest("User already exists.");
+                return BadRequest(new { success = false, message = "User already exists." });
 
             CreatePasswordHash(request.Password, out byte[] hash, out byte[] salt);
 
@@ -49,9 +48,7 @@ namespace healthWebApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("Registered successfully.");
-
-
+            return Ok(new { success = true, message = "Registered successfully." });
         }
 
 
@@ -75,7 +72,7 @@ namespace healthWebApi.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { token, refreshToken, role = user.Role,username=user.Username });
+            return Ok(new { token, refreshToken, role = user.Role, username = user.Username });
         }
 
         // Utility functions

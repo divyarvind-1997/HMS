@@ -1,0 +1,52 @@
+<body>
+  <div class="container-fluid vh-100">
+    <div class="row h-100">
+      <!-- Left Illustration -->
+      <div class="col-md-6 illustration">
+        <img src="../../assets/hms.png" alt="Healthcare">
+      </div>
+
+      <!-- Right Signup Form -->
+      <div class="col-md-6 form-section">
+        <div class="card shadow p-4">
+          <h3 class="text-center mb-4">Sign Up to Continue</h3>
+
+          <!-- ✅ Properly opened and closed form -->
+          <form [formGroup]="signupForm" (ngSubmit)="register()">
+
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">User Name</label>
+              <input id="username" type="text" class="form-control" formControlName="username"
+                placeholder="Mobile number / Email Id" />
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" type="password" class="form-control" formControlName="password"
+                placeholder="Enter password" />
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select id="role" class="form-select" formControlName="role">
+                <option value="" disabled>Select Role</option>
+                @for (role of roles; track role) {
+                <option [value]="role">{{ role }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary">SIGN UP</button>
+              <a class="btn btn-primary" routerLink="/login">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
