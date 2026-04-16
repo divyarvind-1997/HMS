@@ -1,0 +1,43 @@
+.action-buttons {
+  display: flex;
+  gap: 12px; /* ✅ space between buttons */
+  margin-bottom: 16px; /* optional spacing from table */
+}
+/* ✅ Fix Actions column layout */
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ✅ Ensure column has enough width */
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+/* Base pill style */
+.status-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ✅ BOOKED */
+.status-booked {
+  background-color: #e8f5e9; /* light green */
+  color: #2e7d32;
+}
+
+/* ✅ CANCELLED */
+.status-cancelled {
+  background-color: #ffebee; /* light red */
+  color: #c62828;
+}
+
+/* ✅ RESCHEDULED */
+.status-rescheduled {
+  background-color: #fff8e1; /* light amber */
+  color: #f9a825;
+}

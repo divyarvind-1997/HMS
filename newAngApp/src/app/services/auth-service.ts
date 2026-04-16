@@ -16,10 +16,8 @@ export class AuthService {
     }
   }
   login(username: string, password: string): Observable<any> {
-    debugger
     return this.http.post<any>(`${this.apiUrl}`, { username, password })
       .pipe(map(response => {
-        debugger
         localStorage.setItem('token', response.token);
         localStorage.setItem('refreshToken', response.refreshToken);
         localStorage.setItem('role', response.role);
@@ -47,7 +45,6 @@ export class AuthService {
   }
 
   getRole(): string | null {
-    debugger
     const token = localStorage.getItem('token');
     if (!token) return null;
     const decoded = this.decodeToken(token);

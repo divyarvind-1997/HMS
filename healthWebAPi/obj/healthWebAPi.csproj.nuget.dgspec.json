@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj": {}
+    "C:\\DemoHMS\\HMS\\healthWebAPi\\healthWebAPi.csproj": {}
   },
   "projects": {
-    "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj": {
+    "C:\\DemoHMS\\HMS\\healthWebAPi\\healthWebAPi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj",
+        "projectUniqueName": "C:\\DemoHMS\\HMS\\healthWebAPi\\healthWebAPi.csproj",
         "projectName": "healthWebAPi",
-        "projectPath": "C:\\HMS\\healthWebAPi\\healthWebAPi.csproj",
-        "packagesPath": "C:\\Users\\10854188\\.nuget\\packages\\",
-        "outputPath": "C:\\HMS\\healthWebAPi\\obj\\",
+        "projectPath": "C:\\DemoHMS\\HMS\\healthWebAPi\\healthWebAPi.csproj",
+        "packagesPath": "C:\\Users\\10838148\\.nuget\\packages\\",
+        "outputPath": "C:\\DemoHMS\\HMS\\healthWebAPi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\10854188\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\10838148\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

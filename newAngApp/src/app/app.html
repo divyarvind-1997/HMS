@@ -17,13 +17,13 @@
         </li>
         <li class="nav-item">
           <!-- <a class="nav-link" routerLinkActive="active" routerLink="/patient" >Patient</a> -->
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/patient']">Patient</a>
+          <a class="nav-link" *ngIf="role=='Admin'" routerLinkActive="active" [routerLink]="['/patient']">Patient</a>
         </li>
         <!-- <li class="nav-item"> -->
-          <a class="nav-link" routerLinkActive="active" routerLink="/doctor" >Doctor</a> 
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/appointment">Appointment</a>
-        </li> -->
+          <a class="nav-link" *ngIf="role=='Admin'" routerLinkActive="active" routerLink="/doctor" >Doctor</a> 
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/appointments">Appointment</a>
+        </li>
        
       </ul>
       }

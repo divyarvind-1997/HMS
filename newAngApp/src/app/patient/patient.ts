@@ -20,7 +20,7 @@ export class PatientComponent implements OnInit {
   searchTerm = '';
   patientForm: FormGroup;
   loading = false;
-
+  role:string| null='';
   constructor(
     private patientService: PatientService,
     private fb: FormBuilder
@@ -37,6 +37,7 @@ export class PatientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem("role");
     this.loadPatients();
   }
 

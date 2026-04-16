@@ -13,7 +13,6 @@ export class PatientService {
 
   // Get all patients with optional search
   getPatients(search?: string): Observable<Patient[]> {
-    debugger
     let params = new HttpParams();
     if (search) {
       params = params.set('search', search);

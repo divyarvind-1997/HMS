@@ -1,0 +1,84 @@
+
+<mat-card class="availability-card">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2>Doctor Availability</h2>
+      <p class="subtitle">Manage your available consultation slots</p>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Date section -->
+  <div class="date-section">
+   
+<form [formGroup]="dateForm" *ngIf="dateForm">
+
+   <mat-form-field appearance="outline">
+        <mat-label>Doctor</mat-label>
+        <mat-select formControlName="doctorId">
+          <mat-option *ngFor="let d of filteredDoctors" [value]="d.doctorId">
+            {{ d.doctorName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="dateForm.errors?.['invalid']">
+          Required
+        </mat-error>
+      </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Select Date</mat-label>
+    <input matInput
+          [matDatepicker]="apptPicker" formControlName="availabledate" [min]="minDateStr">
+           <mat-datepicker-toggle matSuffix [for]="apptPicker"></mat-datepicker-toggle>
+        <mat-datepicker #apptPicker></mat-datepicker>
+         <mat-error *ngIf="dateForm.errors?.['invalid']">
+          Required
+        </mat-error>
+    <mat-error *ngIf="dateForm.errors?.['dateInPast']">
+          Date cannot be in past
+        </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="loadSlots()">
+    Load Slots
+  </button>
+
+</form>
+
+  </div>
+
+  <!-- Slots -->
+  <div *ngIf="slots.length" class="slots-section">
+
+    <div class="slots-header">
+      <h3>Available Time Slots</h3>
+
+      <div>
+        <button mat-stproked-button color="primary" (click)="selectAll()">Select All</button>
+        <button mat-stroked-button color="warn" (click)="clearAll()">Clear All</button>
+      </div>
+    </div>
+
+    <mat-chip-listbox multiple class="slot-grid">
+      <mat-chip-option
+        *ngFor="let slot of slots"
+        [selected]="slot.isAvailable"
+        (selectionChange)="onSlotSelectionChange(slot, $event.selected)">
+        {{ slot.display }} 
+      </mat-chip-option>
+    </mat-chip-listbox>
+
+    <div  class="footer">
+      <button mat-stroked-button type="button" (click)="onClickBack()">
+        Back
+      </button>
+      <button mat-raised-button type="button" (click)="saveAvailability()">
+        Save Availability
+      </button>
+    </div>
+
+  </div>
+
+</mat-card>

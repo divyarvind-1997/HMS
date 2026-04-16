@@ -21,6 +21,7 @@ export class DoctorComponent implements OnInit {
   searchTerm = '';
   doctorForm: FormGroup;
   loading = false;
+  role:string| null='';
 
   constructor(
     private doctorService: DoctorService,
@@ -38,6 +39,8 @@ export class DoctorComponent implements OnInit {
   }
 
  ngOnInit(): void {
+      this.role = localStorage.getItem("role");
+
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['/login']);
     }

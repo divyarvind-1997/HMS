@@ -12,5 +12,11 @@ namespace healthWebApi.Data
 
         public DbSet<Doctor> Doctors => Set<Doctor>();
 
+         public DbSet<Appointment> Appointments { get; set; }
+
+         public DbSet<DoctorTimeSlot> DoctorTimeSlots { get; set; }
+
+
+
     }
 }

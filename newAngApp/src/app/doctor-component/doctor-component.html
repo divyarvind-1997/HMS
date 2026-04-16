@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <h1>Doctor Management</h1>
-    <button class="btn btn-primary" (click)="showAddForm()">Add New Doctor</button>
+    <button class="btn btn-primary" *ngIf="role =='Doctor'" (click)="showAddForm()">Add New Doctor</button>
   </div>
 
   <!-- Search Section -->

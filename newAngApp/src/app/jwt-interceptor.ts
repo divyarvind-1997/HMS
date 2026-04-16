@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
 export class JwtInterceptor implements HttpInterceptor{
    constructor(private router: Router) {}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      debugger
     const token = localStorage.getItem('token');
     if (token) {
-      debugger
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

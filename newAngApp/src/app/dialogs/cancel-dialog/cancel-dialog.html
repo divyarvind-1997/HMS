@@ -1,0 +1,23 @@
+<h2 mat-dialog-title class="dialog-title">
+  Cancel Appointment
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p>Are you sure you want to cancel this appointment?</p>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Reason</mat-label>
+    <textarea matInput rows="3" [(ngModel)]="reason"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button mat-dialog-close>
+    No
+  </button>
+
+  <button mat-raised-button color="warn" type="button" (click)="cancelAppointment()">
+    Cancel Appointment
+  </button>
+</mat-dialog-actions>
+``

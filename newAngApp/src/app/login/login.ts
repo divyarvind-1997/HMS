@@ -25,7 +25,6 @@ export class Login implements OnInit{
     if (this.username !=null) {
        this.authService.login(this.username,this.password).subscribe({
         next: (res: any) => {
-         debugger
         //  const token = localStorage.getItem('token');
         //  const headers = new HttpHeaders().set('Authorization', 'Bearer ${token}');
           // Navigate based on role

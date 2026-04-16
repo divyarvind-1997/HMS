@@ -6,10 +6,13 @@ import { Login } from './login/login';
 import { Error } from './error/error';
 import { Doctor } from '../Models/Doctor';
 import { PatientComponent } from './patient/patient';
-import { Appointment } from './appointment/appointment';
+import { Appointment } from '../Models/appointment';
 import { Dashboard } from './dashboard/dashboard';
 import { DoctorComponent } from './doctor-component/doctor-component';
 import { Signup } from './signup/signup';
+import { AppointmentList } from './appointment-list/appointment-list';
+import { BookAppointmentComponent } from './book-appointment/book-appointment';
+import { DoctorAvailability } from './doctor-availability/doctor-availability';
 
 
 
@@ -21,9 +24,10 @@ export const routes: Routes = [
    { path: 'signup', component: Signup },
    { path: 'doctor', component: DoctorComponent },
   { path: 'patient', component: PatientComponent },
-  { path: 'appointment', component: Appointment },
+  { path: 'appointments', component: AppointmentList },
   { path: 'notification', component: Notification },
-
+{ path: 'appointments/book', component: BookAppointmentComponent },
+  { path: 'doctor/availability', component: DoctorAvailability },
   { path: 'error', component: Error },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

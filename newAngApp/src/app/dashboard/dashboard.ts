@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth-service';
 import { Router } from '@angular/router';
+import { AppointmentService } from '../services/appointment.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,28 @@ import { Router } from '@angular/router';
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
-  constructor(private authSer: AuthService, private router: Router) { }
+  doctorCount: number=0;
+patientCount: number=0;
+appointmentCount: number=0;
+  constructor(private authSer: AuthService, private router: Router, private api:AppointmentService,private cdr: ChangeDetectorRef) { }
   ngOnInit(): void {
     if (!this.authSer.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
+
+    this.api.getDashboardCounts().subscribe({
+      next: (res: any) => {
+        console.log('dashboard res =>', res);
+ 
+        this.doctorCount = res?.doctorCount ?? res?.DoctorCount ?? 0;
+        this.patientCount = res?.patientCount ?? res?.PatientCount ?? 0;
+        this.appointmentCount = res?.appointmentCount ?? res?.AppointmentCount ?? 0;
+ 
+        // Force UI refresh in case CD is not triggering
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('dashboard error =>', err),
+    });
   }
 
 }

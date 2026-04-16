@@ -1,0 +1,147 @@
+.slots-toggle-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+mat-button-toggle {
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: var(--mat-primary);
+  color: white;
+}
+.slot-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  transition: all 0.25s ease;
+}
+
+.slot-chip mat-icon {
+  font-size: 18px;
+}
+
+.slot-chip.selected {
+  background-color: var(--mat-primary);
+  color: white;
+  transform: scale(1.03);
+}
+/* Card */
+.availability-card {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+/* Header */
+.header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Date Section */
+.date-section {
+  margin-top: 24px;
+}
+
+.date-form {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  width: 220px;
+}
+
+/* Slots Section */
+.slots-section {
+  margin-top: 32px;
+}
+
+/* Slots Header */
+.slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.slots-header h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.slot-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Slots Grid */
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+/* Slot Buttons */
+.slot-chip {
+  border-radius: 20px;
+  background: #eef2ff;
+  color: #1e3a8a;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.slot-chip:hover {
+  background: #dbeafe;
+}
+
+/* Selected Slot */
+.slot-chip.selected {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* Footer */
+.footer {
+  margin-top: 32px;
+  text-align: right;
+}
+
+.save-btn {
+  padding: 8px 24px;
+  font-weight: 500;
+}
+@use '@angular/material' as mat;
+
+/* 1️⃣ Include core styles */
+@include mat.core();
+
+/* 2️⃣ Define primary, accent, warn palettes */
+$primary-palette: mat.define-palette(mat.$indigo-palette);
+$accent-palette: mat.define-palette(mat.$blue-palette, A200, A100, A400);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+/* 3️⃣ Create theme */
+$hms-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  )
+));
+
+/* 4️⃣ Apply theme */
+@include mat.all-component-themes($hms-theme);

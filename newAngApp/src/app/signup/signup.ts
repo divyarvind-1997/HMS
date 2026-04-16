@@ -30,16 +30,13 @@ export class Signup {
   if (this.signupForm.invalid) return;
 
   const payload = this.signupForm.value;
-  //console.log('Sending to backend:', payload);
 
   this.userSignup.registerUser(payload)
     .subscribe({
       next: (response: any) => {
-        debugger;
         const succ = JSON.parse(response);
         if (succ.success) {
           alert(succ.message); // "Registered successfully."
-          //console.log('✅ Success:', response);
           this.router.navigate(['/login']);
         } 
         // else {
@@ -50,7 +47,6 @@ export class Signup {
       },
       error: (error) => {
 
-        debugger;
         const err = JSON.parse(error.error);
         // console.error('❌ Error:', error);
         // // If backend sends BadRequest with JSON, Angular will still put it in error.error
@@ -62,7 +58,6 @@ export class Signup {
 //   this.userSignup.registerUser(payload).subscribe({
 //   next: (res: string) => {
 //     debugger
-//     console.log('Backend response:', res);
 //     alert(res || 'User registered successfully');
 //     this.router.navigate(['/login']);
 //   },
