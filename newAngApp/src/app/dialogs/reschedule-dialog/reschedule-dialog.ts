@@ -97,7 +97,10 @@ const payload = {
 };
     this.api.getAvailableTimeSlots(payload).subscribe({
       next: (res) => { 
-        this.availableSlots = res;  },
+        if(res.length > 0)
+        {this.availableSlots = res; }
+        else{ alert("Doctor is not available on the selected dates")}
+         },
       error: () => { this.availableSlots = [];  }
     });
   }

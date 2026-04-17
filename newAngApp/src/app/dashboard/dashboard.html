@@ -1,67 +1,48 @@
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-    
-
-      <!-- Main content -->
-      <main class="col-md-9 content">
-        <h2>Dashboard Overview</h2>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card text-center mb-4">
-              <div class="card-body">
-                <h5 class="card-title">patient</h5>
-                <p class="card-text display-6">{{ patientCount }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card text-center mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Appointments</h5>
-                <p class="card-text display-6">{{appointmentCount}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card text-center mb-4">
+<div class="container-fluid dashboard-container">
+  <div class="row">
+ 
+    <!-- Main content -->
+    <main class="col-md-12 content">
+      <h2 class="dashboard-title">Dashboard Overview</h2>
+ 
+      <div class="row">
+        <!-- Patients -->
+        <div class="col-md-4">
+          <div class="card stat-card text-center mb-4">
             <div class="card-body">
-                <h5 class="card-title">Doctors</h5>
-                <p class="card-text display-6">{{doctorCount}}</p>
-              </div>
+              <h5 class="card-title">
+                <i class="bi bi-people-fill"></i> Patients
+              </h5>
+              <p class="card-text display-6">{{ patientCount }}</p>
             </div>
           </div>
         </div>
-
-        <!-- <h3>Recent Activity</h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>User</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2026-04-05</td>
-              <td>John Doe</td>
-              <td>Logged in</td>
-            </tr>
-            <tr>
-              <td>2026-04-05</td>
-              <td>Jane Smith</td>
-              <td>Booked Appointment</td>
-            </tr>
-            <tr>
-              <td>2026-04-04</td>
-              <td>Admin</td>
-              <td>Updated Settings</td>
-            </tr>
-          </tbody>
-        </table> -->
-      </main>
-    </div>
+ 
+        <!-- Appointments -->
+        <div class="col-md-4">
+          <div class="card stat-card text-center mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-calendar-check-fill"></i> Appointments
+              </h5>
+              <p class="card-text display-6">{{ appointmentCount }}</p>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- Doctors -->
+        <div class="col-md-4">
+          <div class="card stat-card text-center mb-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-person-badge-fill"></i> Doctors
+              </h5>
+              <p class="card-text display-6">{{ doctorCount }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    </main>
   </div>
+</div>
